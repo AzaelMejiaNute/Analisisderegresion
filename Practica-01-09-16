@@ -1,0 +1,46 @@
+# Analisisderegresion
+##estaturas 1.2, 1.23, 1.19, 1.32, 1.28, 1.22, 1.17, 1.29, 1.33, 1.15
+###nivel economico 110, 130, 108, 167, 156, 115, 104, 138, 170, 107
+##? plot
+
+estt<- c(1.2, 1.23, 1.19, 1.32, 1.28, 1.22, 1.17, 1.29, 1.33, 1.15)
+nec<- c(110, 130, 108, 167, 156, 115, 104, 138, 170, 107)
+
+plot (nec, estt, xlab = "Ingreso economico", ylab = "Estatura", main = "Grafica de dispersión")
+
+##Primero debemos sacar grafica de dispersion 
+##para calcular coeficiente de correlacion se usa la correlacion de "cor" normalmente se usa pearson
+?cor
+##cor(x, y = NULL//var dependiente//, use = "everything",method = c("pearson", "kendall", "spearman"))
+cor(estt, nec, method = "pearson")  ##=.9556275 hay alta correlacion 
+
+## cor.test va generar un nueva corrleacion entre variables
+
+cor.test(estt, nec, method = "pearson")
+##si pvalue < .05  hay relacion de variable, rechaza h0
+#ya que se comprueba se usa el modelo
+mod1<- lm(estt~nec)  #lm = lineal model
+summary (mod1)   #para mandarlo a llamar
+## que los residuos esten cercanos a 0  
+##Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1---------> son para saber que tan
+##significativos son los datos
+
+
+##los residuales nos generan las diferencias
+##entre los valores ajustados y los reales
+#entre los resultados vemos si son significativos
+
+plot(nec, estt, pch = 11, xlab = "Ingresos", ylab = "Estatura", main = "Grafica de dispersión", sub = "Regresión lineal", col = "red")
+
+abline(mod1) ### da la recta ajustada de dispersion
+
+##planteamos la ecuacion
+
+estt= .9323 + .0023 nec
+
+##plantear hipotesis con variables reales minimo 16 datos mandar al correo
+
+
+
+
+
