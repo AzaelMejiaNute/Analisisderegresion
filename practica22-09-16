@@ -1,0 +1,133 @@
+# Analisisderegresion
+##estaturas 1.2, 1.23, 1.19, 1.32, 1.28, 1.22, 1.17, 1.29, 1.33, 1.15
+###nivel economico 110, 130, 108, 167, 156, 115, 104, 138, 170, 107
+##? plot
+
+estt<- c(1.2, 1.23, 1.19, 1.32, 1.28, 1.22, 1.17, 1.29, 1.33, 1.15)
+nec<- c(110, 130, 108, 167, 156, 115, 104, 138, 170, 107)
+
+plot (nec, estt, xlab = "Ingreso economico", ylab = "Estatura", main = "Grafica de dispersión")
+
+##Primero debemos sacar grafica de dispersion 
+##para calcular coeficiente de correlacion se usa la correlacion de "cor" normalmente se usa pearson
+?cor
+##cor(x, y = NULL//var dependiente//, use = "everything",method = c("pearson", "kendall", "spearman"))
+cor(estt, nec, method = "pearson")  ##=.9556275 hay alta correlacion 
+
+## cor.test va generar un nueva corrleacion entre variables
+
+cor.test(estt, nec, method = "pearson")
+##si pvalue < .05  hay relacion de variable, rechaza h0
+#ya que se comprueba se usa el modelo
+mod1<- lm(estt~nec)  #lm = lineal model
+summary (mod1)   #para mandarlo a llamar
+## que los residuos esten cercanos a 0  
+##Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1---------> son para saber que tan
+##significativos son los datos
+
+
+##los residuales nos generan las diferencias
+##entre los valores ajustados y los reales
+#entre los resultados vemos si son significativos
+
+plot(nec, estt, pch = 11, xlab = "Ingresos", ylab = "Estatura", main = "Grafica de dispersión", sub = "Regresión lineal", col = "red")
+
+abline(mod1) ### da la recta ajustada de dispersion
+
+##planteamos la ecuacion
+
+estt= .9323 + .0023 nec
+
+##plantear hipotesis con variables reales minimo 16 datos mandar al correo
+# Analisisderegresion
+... continuacion
+#se tiene un ajuste
+estt = .9323 + .0023 nec
+###los valores de pvalue son inferiores a .05 por lo que..
+##1) relacion lineal entre la var dependiente y la independiente
+# relacion positiva
+# por cada peso de ingreso que aumenta el padre o madre
+## aumenta la estatura enm .0023
+## el error estandar residual es .0198 este valor es muy importante
+### debido a que permite medir la calidad del modelo
+# con este error generamos intervalos de confianza
+#los IC nos permiten complementar la informacion sobre las estimaciones
+#para calcular IC se utiliza
+confint(mod1, level = .95)
+#interpretacion.... con uno probabilidad del 95% b0 se
+# encuentra en el intervalo (.8542,1.0105)
+#y b1 se encuentra entre (.0017,.0029)
+#bondad de ajuste
+### con la bondad de ajuste verificamos la confianza del modelo
+##al interpretar la variable dependiente para eso se utiliza la ANOVA
+anova (mod1)
+#en este caso la variabilidad explicada del modelo es 0.033022 = SSM
+## se revisa la SSR = .0031
+## revisando los valores del summary el estadistico
+#F es mayor a 1 y pvalue < .05
+##con estas revisiones se puede mencionar que se rechaza
+#la hipotesis nula F=1
+# y se puede establecer un modelo
+
+
+
+
+#revisar R2 multiple
+# alrededor del 91% de la variabilidad de la estructura es explicada por
+##la recta ajustada
+##supuestos##
+base1 <- data.frame(nec, estt)
+base1$fitted.mod1<- fitted(mod1)
+base1$residuals.mod1<- residuals(mod1)
+base1$rstudent.mod1<- rstudent(mod1)
+
+
+#estas variables se utilizan para comprobar supuestos
+## supuesto de normalidad.... es que los residuos tengan una
+#distribucion normal
+shapiro.test(base1$rstudent.mod1)
+#prueba de hipotesis shapiro test
+#h0. la muestra tiene una distribucion normal
+#ha; la muestra no tiene una distribucion normal
+#tomando un pvalue de .8172 no se rechaza la hipotesus nula
+#por lo tanto se acepta una normalidad
+#ahora veamos el resultado en un grafico
+qqnorm (base1$rstudent.mod1, main = "Normal (0,1)")
+qqline (base1$rstudent.mod1)
+#ahora vamos a revisar la homogeneidad de varianzas
+#para la homogeneiidad se requiere librería llamada lmtest, debido a
+#que se tiene que aplicar la paqueteria breuch
+install.packages("lmtest")
+require(lmtest)
+bptest (mod1)
+##en esta prueba esperamos hompgeniedad en la varianza
+#ho: si hay homogeneidad
+#ha: no hay
+#en la rpueba se obtuvo un pevalue de .6108
+#por lo tanto no se rechaza la hipotesis nula
+##para eso tenemos que tener un pvalue mayor de .05, por lo que 
+##para mod1 se puede decir que hay homogeneidad en las varianzas
+dwtest(mod1, alternative ="two.side")
+#h0: no hay autocorrelcaion
+#ha: hay auto..
+# en este caso al igual ue los demas se acepta la hipotesis nula
+#debido a que tenemos un pvalue mayor a .05 esto quiere decir que
+#no hay autocorrelacion entre los residuos...
+#otra forma de evaluar  la prueba de durbin whatson es con el valor
+##de durbin watsin que se espera que este en el rango de 1.5 a 2.5
+#si esta en este rango si hay autocorrelacion
+plot(base1$residuals.mod1, pch = 23, col = "Blue", bg = "Yellow", ylab = "Residuales", xlab = "in")
+abline (h =cor(base1$estt, base1$nec))
+#en este caso s tiene una grafica sin relacion
+#indica que no hay realcion
+
+
+#ahora debemos definir los limites de 
+limbase1 <- seq(min(base1$nec), max (base1$nec), length = 10)
+limbase1 <- data.frame(limbase1)
+limbasep <- predict.lm(mod1, limbase1, interval = "prediction", se.fit = TRUE, data = base1)
+head (limbasep$fit) ## te generan los limites 
+Limnos <- c("fit", "recta", "Student")
+matplot (limbase1, limbasep$fit, type = "l", xlab = "ingres", ylab = "estatura", labels(Limnos))
+  #investigar como agregar etiquetas....
+###############
