@@ -1,0 +1,82 @@
+
+#despues de analiizar graficamente
+#se compican pruebas para confirmar
+#que el mismo si cupe los ssupuestos
+#para aplicar estas pruebas se generan los valores ajustados, resduales y etandarizados.
+
+mochil$ajustados <- fitted(modmo)  #fitt realmente obtiene los valores ajustaos del
+#modelo
+mochil$res <- residuals(modmo)## deben estar cercanos a cero ya que son los residuales
+mochil$rstud <- rstudent(modmo)### para ver los errores, mayor sea el error menor es posible haya relacion
+
+
+###prueba de normalidad
+##paqueteria lmtest
+install.packages("lmtest")
+require("lmtest")
+
+ks.test(mochil$rstud, "pnorm")   ###  "pnorm"= es el modelo que se usará
+#se pplantea una pprueba de hipotesis
+##se espera un p value mayor a .05
+#si tenemos, un p value mayor no se rechaza la hipotesis nula y se acepta 
+##que hay normalidad
+##en este caso el modelo pasa la prueba de normalidad
+### la segunda prueba se hace es
+##la homogeneidad de varianzas y esta prueba se realia con bptest
+bptest(modmo, studentize = FALSE, data = mochil)   #ve la homogeneidad de las vairanzas
+##el sergundo argumento se pone para que la prueba no tome los errores estandarizados o rstudent
+
+## tenemos un p value mayor a .05 por lo tanto pasa la prueba de homogenedad
+##varianzas
+
+##la tercera prueba es de autocorrelacion
+##esta prueb se llama durbin whatson#
+##la funcion es .
+dwtest (modmo, alternative = "two.sided", data = mochil)
+
+### en esta hay dos modalidades para comprobar
+#1) el p alue es mayor  .05
+#2) el valor de durbin watson (rango aceptable de 1.5 a 2.5)
+##esto quiere decir que hay independencia entre los errores, o no gay correlacion entre ellos
+###hasta aqui podríamos confirmar que no hay correlacion
+##entre kis residuos
+##COn estas pruebas ya se confirma que tenemos un modelo
+##con buen ajuste. sin embargo hay que revisar los casos atipicos
+##se utioliza (car)
+require("car")
+install.packages("car")
+
+outliertest (modmo)
+outlier.test (test)
+
+#sirve para saber que tanto influye en tl modelo
+
+#### una vez que obrsevaos los casos atipicos podemos conocer la influencia de  
+##estos eb el modelo, para observar la influencia se utiliza
+## la funcion:
+influ <- influence.measures(modmo)
+summary(influ)
+## en la primer columna se observa los casos
+##con mayor influencia en este modelonson 1,2,10
+##las columnas que hacen referencia en los coedicientes del modelo
+#las columnas que nos presentan mayor interes son
+##las cook.d que nos exponen con mayor claridad la
+##influencia el cook.d es la distancia e cool
+## y entre mas cercano a 1 hay mayr influencia en este caso la obs 10 es 
+# es que tiene mayor distacia de cook
+##en esta distancia valores mayores a 1 hay certeza de que si influyen 
+#en la columna de hat se asocia cpn las medidas de leverage que varian entre 0 y 1 cuanto mayor se aceruqen a 1 mayor influencia
+influenceplot (modmo)
+#
+install.packages ("faraway")
+require (faraway)
+dc <- cooks.distance(modmo)
+etiquete <- row.names(mochil)
+halfnorm(dc,3, etiquete)
+#tenemos un buen modelo, problema es una observacion la 10
+
+
+
+
+
+
