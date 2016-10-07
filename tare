@@ -1,0 +1,19 @@
+#EJERCICIO   (Mexico Brazil Argentina)
+##deseamos estimar una recta de regresion donde las v.d. es 
+##la esperanza de vida femenina y las v.i. son:_
+
+##0)tasa global de fecundidad
+##1)la tasa de mortalidad infantil
+##2)Porcentaje de hombres alfabetas (alfabmaS)
+##3)    "      "  mujeres    "      (alfabfem)
+##4)tasa de poblacion urbana
+##5)PIB percapita
+##6)la relacion entre nacimientos y defunciones  (nac_def)
+##7)tasa de crecimiento de la poblacion (% anual)
+
+##datos banco mundial    2005-2015
+
+##http://data.worldbank.org/data-catalog/world-development-indicators    <<---- tarea
+
+
+
