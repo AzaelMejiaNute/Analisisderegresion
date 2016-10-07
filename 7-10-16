@@ -1,0 +1,20 @@
+mod2 <- lm(precio~calidad, data = moch)
+
+##aplicar un buen modelo
+moch$ajus <- fitted(mod2)
+moch$resi <- residuals(mod2)
+moch$rstud <- rstudent(mod2)
+
+##ahora probamos normalidad
+install.packages("lmtest")
+require(lmtest)
+ks.test(moch$rstud, "pnorm")
+#histograma
+hist(moch$rstud, xlab = "Residuales", main = "Hist residuales")
+##el p value para el contraste de la normalidad es mayor que .05 (p=.6434)
+##histograma si par3ece una distribucion normal
+bptest(mod2, studentize = FALSE, data = moch)
+#significa que p es = .4154, mayor a .05 por lo que podemos decir que la varianza 
+#es constante a lo loargo de la muestra.
+dwtest(mod2, alternative = "two.sided", data = moch)
+##p=.2976
