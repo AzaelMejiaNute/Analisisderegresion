@@ -1,0 +1,126 @@
+#### ejercicio en clase ####
+
+
+
+y = c(25.5, 31.2, 25.9, 38.4, 18.4, 26.7, 26.4,25.9,32,25.2,39.7,35.7,26.5)
+x1= c(1.74,6.32,6.2,10.52,1.19,1.22,4.10,6.32,4.08,4.15,10.15,1.72,1.70)
+x2= c(5.30,5.42,8.41,4.63,11.60,5.85,6.62,8.72,4.42,7.60,4.83,3.12,5.3)
+x3= c(10.8,9.4,7.2,8.5,9.4,9.9,8,9.1,8.7,9.2,9.4,7.6,8.2)
+hexe <- data.frame(x1, x2, x3, y)
+
+## 0) analizar graficos de dispersion y pruebas de correlacion
+## 1) plantear la ecuacion estimada origina, es decir con todas las variables
+## 2) analizar la anova, r cuadrada, estadistico F (mediante p.h.)
+# 3) comparen modelos ccon backward y analicen el modelo qyue genere la funcion step
+##con analizar me refiero a los incisos 0, 1, 2
+#en dado caso que la funcion step genere el mismo modelo qu el modelo completo hagan caso omiso
+##4) analizar la prubea de 3 supuestos a este modelo (kolmogorov-smirnov, breuch)
+
+cor (hexe, use ="everything", method="pearson")
+## Observamos que las variables tienen correlaciones diversas
+
+##x1         x2         x3          y
+##x1  1.0000000 -0.1540256 -0.1443696  0.6542986
+##x2 -0.1540256  1.0000000  0.0748444 -0.7858050
+##x3 -0.1443696  0.0748444  1.0000000 -0.1862750
+##y   0.6542986 -0.7858050 -0.1862750  1.0000000
+
+
+
+## Aplicamos Modelo
+vater<-lm(y~x1+x2+x3)
+summary(vater)
+
+
+###Coefficients:
+##Estimate Std. Error t value Pr(>|t|)    
+##(Intercept)  39.1767     5.8813   6.661 9.25e-05 ***
+##  x1            1.0166     0.1908   5.328 0.000476 ***
+##  x2           -1.8608     0.2671  -6.965 6.57e-05 ***
+##  x3           -0.3461     0.6165  -0.561 0.588196    
+##---
+##  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+##Residual standard error: 2.071 on 9 degrees of freedom
+##Multiple R-squared:  0.9119,	Adjusted R-squared:  0.8825 
+##F-statistic: 31.04 on 3 and 9 DF,  p-value: 4.465e-05
+##Residual standard error: 2.071 on 9 degrees of freedom
+##Multiple R-squared:  0.9119,	Adjusted R-squared:  0.8825 
+##F-statistic: 31.04 on 3 and 9 DF,  p-value: 4.465e-05
+
+
+##Por nuestra R cuandrada asumimos que la recta de regresion 
+## explica el 88.25% dela variabilidad del modelo.
+##cumple para F>1
+
+plot(vater, which = 1, pch=3)
+plot(vater, which=2, pch=3)
+plot(vater,which=3,pch=3)
+plot(vater,which=5,pch=3)
+
+##solo con wich =2 se muestra una distribucion normal
+
+hunt<- hexe[c(-5,-11,-12)]
+
+cor(hunt, use ="everything", method="pearson")
+##las correlaciones no cmabian
+
+##x1         x2         x3          y
+##x1  1.0000000 -0.1540256 -0.1443696  0.6542986
+##x2 -0.1540256  1.0000000  0.0748444 -0.7858050
+##x3 -0.1443696  0.0748444  1.0000000 -0.1862750
+##y   0.6542986 -0.7858050 -0.1862750  1.0000000
+
+plot(x1,y,pch=12, xlab="X1", ylab="Y", main="Gráfica de Disperción", col="blue")
+##datos con poca realcion positiva
+cor(x1,y, method = "pearson")
+## con un 0.6542986 hay bastante correlacion de datos positiva
+
+
+plot(x2,y,pch=12, xlab="X1", ylab="Y", main="Gráfica de Disperción", col="blue")
+##datos con relacion negativa
+cor(x2,y, method = "pearson")
+##-0.785805  hay bastante relacion negativa
+
+
+plot(x3,y,pch=12, xlab="X1", ylab="Y", main="Gráfica de Disperción", col="blue")
+##totalmente disperso
+cor(x3,y, method = "pearson")
+##-0.186275   existe muy poca relacion
+
+
+ich <- lm(y~x1+x2+x3 ,data = hexe)
+summary(ich)
+
+
+step(ich,direction="backward")
+
+##Start:  AIC=22.15
+##y ~ x1 + x2 + x3
+
+##Df Sum of Sq     RSS    AIC
+##- x3    1     1.353  39.970 20.601
+##<none>               38.618 22.154
+##- x1    1   121.814 160.431 38.668
+##- x2    1   208.174 246.792 44.267
+
+##Step:  AIC=20.6
+##y ~ x1 + x2
+
+##Df Sum of Sq    RSS    AIC
+##<none>               39.97 20.601
+##- x1    1    127.62 167.59 37.235
+##- x2    1    210.59 250.56 42.464
+
+##Call:
+##  lm(formula = y ~ x1 + x2, data = hexe)
+
+##Coefficients:
+##  (Intercept)           x1           x2  
+##36.089        1.031       -1.869  
+
+
+##dado que el AIC para las variables x1 y x2 es menor podemos decir que este modelo es mejor
+
+step(mod1,direction="both")
+
+step(mod1,direction="forward")
