@@ -75,34 +75,118 @@ LmBr <-  subset(BRA, BRA$Indicator.Name == "Literacy rate, adult male (% of male
 LmAr <-  subset(ARG, ARG$Indicator.Name == "Literacy rate, adult male (% of males ages 15 and above)")
 
 
-##relacionando variable dependiente con independientes
+  ##relacionando variable dependiente con independientes
 
-##MEXICO
-EMx_mMx <- rbind.data.frame(EMx, mMx)
-EMx_PMx <- rbind.data.frame(EMx, PMx)
-EMx_dMx <- rbind.data.frame(EMx, dMx)
-EMx_gMx <- rbind.data.frame(EMx, gMx)
-EMx_GMx <- rbind.data.frame(EMx, GMx)
-EMx_LfMx <- rbind.data.frame(EMx, LfMx)
-EMx_LmMx <- rbind.data.frame(EMx, LmMx)
+  ##MEXICO
+  EMx_mMx <- rbind.data.frame(EMx, mMx)
+  EMx_PMx <- rbind.data.frame(EMx, PMx)
+  EMx_dMx <- rbind.data.frame(EMx, dMx)
+  EMx_gMx <- rbind.data.frame(EMx, gMx)
+  EMx_GMx <- rbind.data.frame(EMx, GMx)
+  EMx_LfMx <- rbind.data.frame(EMx, LfMx)
+  EMx_LmMx <- rbind.data.frame(EMx, LmMx)
 
-##BRASIL
-EBr_mBr <- rbind.data.frame(EBr, mBr)
-EBr_PBr <- rbind.data.frame(EBr, PBr)
-EBr_dBR <- rbind.data.frame(EBr, dBr)
-EBr_gBr <- rbind.data.frame(EBr, gBr)
-EBr_GBr <- rbind.data.frame(EBr, GBr)
-EBr_LfBr <- rbind.data.frame(EBr, LfBr)
-EBr_LmBr <- rbind.data.frame(EBr, LmBr)
+  ##BRASIL
+  EBr_mBr <- rbind.data.frame(EBr, mBr)
+  EBr_PBr <- rbind.data.frame(EBr, PBr)
+  EBr_dBR <- rbind.data.frame(EBr, dBr)
+  EBr_gBr <- rbind.data.frame(EBr, gBr)
+  EBr_GBr <- rbind.data.frame(EBr, GBr)
+  EBr_LfBr <- rbind.data.frame(EBr, LfBr)
+  EBr_LmBr <- rbind.data.frame(EBr, LmBr)
 
-##ARGENTINA
-EAr_mAr <- rbind.data.frame(EAr, mAr)
-EAr_PAr <- rbind.data.frame(EAr, PAr)
-EAr_dAr <- rbind.data.frame(EAr, dAr)
-EAr_gAr <- rbind.data.frame(EAr, gAr)
-EAr_GAr <- rbind.data.frame(EAr, GAr)
-EAr_LfAr <- rbind.data.frame(EAr, LfAr)
-EAr_LmAr <- rbind.data.frame(EAr, LmAr)
+  ##ARGENTINA
+  EAr_mAr <- rbind.data.frame(EAr, mAr)
+  EAr_PAr <- rbind.data.frame(EAr, PAr)
+  EAr_dAr <- rbind.data.frame(EAr, dAr)
+  EAr_gAr <- rbind.data.frame(EAr, gAr)
+  EAr_GAr <- rbind.data.frame(EAr, GAr)
+  EAr_LfAr <- rbind.data.frame(EAr, LfAr)
+  EAr_LmAr <- rbind.data.frame(EAr, LmAr)
+
+
+##Selecion de periodo
+
+mxEm <- data.frame(EMx_mMx$X2005, EMx_mMx$X2006, EMx_mMx$X2007, EMx_mMx$X2008, EMx_mMx$X2009, EMx_mMx$X2010, EMx_mMx$X2011, EMx_mMx$X2012, EMx_mMx$X2013, EMx_mMx$X2014, EMx_mMx$X2015)
+brEm <- data.frame(EBr_mBr$X2005, EBr_mBr$X2006, EBr_mBr$X2007, EBr_mBr$X2008, EBr_mBr$X2009, EBr_mBr$X2010, EBr_mBr$X2011, EBr_mBr$X2012, EBr_mBr$X2013, EBr_mBr$X2014, EBr_mBr$X2015)
+arEm <- data.frame(EAr_mAr$X2005, EAr_mAr$X2006, EAr_mAr$X2007, EAr_mAr$X2008, EAr_mAr$X2009, EAr_mAr$X2010, EAr_mAr$X2011, EAr_mAr$X2012, EAr_mAr$X2013, EAr_mAr$X2014, EAr_mAr$X2015)
+
+
+mxEP <- data.frame(EMx_PMx$X2005, EMx_PMx$X2006, EMx_PMx$X2007, EMx_PMx$X2008, EMx_PMx$X2009, EMx_PMx$X2010, EMx_PMx$X2011, EMx_PMx$X2012, EMx_PMx$X2013, EMx_PMx$X2014, EMx_PMx$X2015)
+brEP <- data.frame(EBr_PBr$X2005, EBr_PBr$X2006, EBr_PBr$X2007, EBr_PBr$X2008, EBr_PBr$X2009, EBr_PBr$X2010, EBr_PBr$X2011, EBr_PBr$X2012, EBr_PBr$X2013, EBr_PBr$X2014, EBr_PBr$X2015)
+arEP <- data.frame(EAr_PAr$X2005, EAr_PAr$X2006, EAr_PAr$X2007, EAr_PAr$X2008, EAr_PAr$X2009, EAr_PAr$X2010, EAr_PAr$X2011, EAr_PAr$X2012, EAr_PAr$X2013, EAr_PAr$X2014, EAr_PAr$X2015)
+
+
+mxEd <- data.frame(EMx_dMx$X2005, EMx_dMx$X2006, EMx_dMx$X2007, EMx_dMx$X2008, EMx_dMx$X2009, EMx_dMx$X2010, EMx_dMx$X2011, EMx_dMx$X2012, EMx_dMx$X2013, EMx_dMx$X2014, EMx_dMx$X2015)
+brEd <- data.frame(EBr_dBr$X2005, EBr_dBr$X2006, EBr_dBr$X2007, EBr_dBr$X2008, EBr_dBr$X2009, EBr_dBr$X2010, EBr_dBr$X2011, EBr_dBr$X2012, EBr_dBr$X2013, EBr_dBr$X2014, EBr_dBr$X2015)
+arEd <- data.frame(EAr_dAr$X2005, EAr_dAr$X2006, EAr_dAr$X2007, EAr_dAr$X2008, EAr_dAr$X2009, EAr_dAr$X2010, EAr_dAr$X2011, EAr_dAr$X2012, EAr_dAr$X2013, EAr_dAr$X2014, EAr_dAr$X2015)
+
+
+mxEg <- data.frame(EMx_gMx$X2005, EMx_gMx$X2006, EMx_gMx$X2007, EMx_gMx$X2008, EMx_gMx$X2009, EMx_gMx$X2010, EMx_gMx$X2011, EMx_gMx$X2012, EMx_gMx$X2013, EMx_gMx$X2014, EMx_gMx$X2015)
+brEg <- data.frame(EBr_gBr$X2005, EBr_gBr$X2006, EBr_gBr$X2007, EBr_gBr$X2008, EBr_gBr$X2009, EBr_gBr$X2010, EBr_gBr$X2011, EBr_gBr$X2012, EBr_gBr$X2013, EBr_gBr$X2014, EBr_gBr$X2015)
+arEg <- data.frame(EAr_gAr$X2005, EAr_gAr$X2006, EAr_gAr$X2007, EAr_gAr$X2008, EAr_gAr$X2009, EAr_gAr$X2010, EAr_gAr$X2011, EAr_gAr$X2012, EAr_gAr$X2013, EAr_gAr$X2014, EAr_gAr$X2015)
+
+
+mxEG <- data.frame(EMx_GMx$X2005, EMx_GMx$X2006, EMx_GMx$X2007, EMx_GMx$X2008, EMx_GMx$X2009, EMx_GMx$X2010, EMx_GMx$X2011, EMx_GMx$X2012, EMx_GMx$X2013, EMx_GMx$X2014, EMx_GMx$X2015)
+brEG <- data.frame(EBr_GBr$X2005, EBr_GBr$X2006, EBr_GBr$X2007, EBr_GBr$X2008, EBr_GBr$X2009, EBr_GBr$X2010, EBr_GBr$X2011, EBr_GBr$X2012, EBr_GBr$X2013, EBr_GBr$X2014, EBr_GBr$X2015)
+arEG <- data.frame(EAr_GAr$X2005, EAr_GAr$X2006, EAr_GAr$X2007, EAr_GAr$X2008, EAr_GAr$X2009, EAr_GAr$X2010, EAr_GAr$X2011, EAr_GAr$X2012, EAr_GAr$X2013, EAr_GAr$X2014, EAr_GAr$X2015)
+
+
+mxELm <- data.frame(EMx_LmMx$X2005, EMx_LmMx$X2006, EMx_LmMx$X2007, EMx_LmMx$X2008, EMx_LmMx$X2009, EMx_LmMx$X2010, EMx_LmMx$X2011, EMx_LmMx$X2012, EMx_LmMx$X2013, EMx_LmMx$X2014, EMx_LmMx$X2015)
+brELm <- data.frame(EBr_LmBr$X2005, EBr_LmBr$X2006, EBr_LmBr$X2007, EBr_LmBr$X2008, EBr_LmBr$X2009, EBr_LmBr$X2010, EBr_LmBr$X2011, EBr_LmBr$X2012, EBr_LmBr$X2013, EBr_LmBr$X2014, EBr_LmBr$X2015)
+arELm <- data.frame(EAr_LmAr$X2005, EAr_LmAr$X2006, EAr_LmAr$X2007, EAr_LmAr$X2008, EAr_LmAr$X2009, EAr_LmAr$X2010, EAr_LmAr$X2011, EAr_LmAr$X2012, EAr_LmAr$X2013, EAr_LmAr$X2014, EAr_LmAr$X2015)
+
+
+mxELf <- data.frame(EMx_LfMx$X2005, EMx_LfMx$X2006, EMx_LfMx$X2007, EMx_LfMx$X2008, EMx_LfMx$X2009, EMx_LfMx$X2010, EMx_LfMx$X2011, EMx_LfMx$X2012, EMx_LfMx$X2013, EMx_LfMx$X2014, EMx_LfMx$X2015)
+brELf <- data.frame(EBr_LfBr$X2005, EBr_LfBr$X2006, EBr_LfBr$X2007, EBr_LfBr$X2008, EBr_LfBr$X2009, EBr_LfBr$X2010, EBr_LfBr$X2011, EBr_LfBr$X2012, EBr_LfBr$X2013, EBr_LfBr$X2014, EBr_LfBr$X2015)
+arELf <- data.frame(EAr_LfAr$X2005, EAr_LfAr$X2006, EAr_LfAr$X2007, EAr_LfAr$X2008, EAr_LfAr$X2009, EAr_LfAr$X2010, EAr_LfAr$X2011, EAr_LfAr$X2012, EAr_LfAr$X2013, EAr_LfAr$X2014, EAr_LfAr$X2015)
+
+
+
+
+
+
+
+
+##Selecion de periodo
+mxE <- data.frame(EMx$X2005, EMx$X2006, EMx$X2007, EMx$X2008, EMx$X2009, EMx$X2010, EMx$X2011, EMx$X2012, EMx$X2013, EMx$X2014, EMx$X2015)
+brE <- data.frame(EBr$X2005, EBr$X2006, EBr$X2007, EBr$X2008, EBr$X2009, EBr$X2010, EBr$X2011, EBr$X2012, EBr$X2013, EBr$X2014, EBr$X2015)
+arE <- data.frame(EAr$X2005, EAr$X2006, EAr$X2007, EAr$X2008, EAr$X2009, EAr$X2010, EAr$X2011, EAr$X2012, EAr$X2013, EAr$X2014, EAr$X2015)
+
+
+mxm <- data.frame(mMx$X2005, mMx$X2006, mMx$X2007, mMx$X2008, mMx$X2009, mMx$X2010, mMx$X2011, mMx$X2012, mMx$X2013, mMx$X2014, mMx$X2015)
+brm <- data.frame(mBr$X2005, mBr$X2006, mBr$X2007, mBr$X2008, mBr$X2009, mBr$X2010, mBr$X2011, mBr$X2012, mBr$X2013, mBr$X2014, mBr$X2015)
+arm <- data.frame(mAr$X2005, mAr$X2006, mAr$X2007, mAr$X2008, mAr$X2009, mAr$X2010, mAr$X2011, mAr$X2012, mAr$X2013, mAr$X2014, mAr$X2015)
+
+
+mxP <- data.frame(PMx$X2005, PMx$X2006, PMx$X2007, PMx$X2008, PMx$X2009, PMx$X2010, PMx$X2011, PMx$X2012, PMx$X2013, PMx$X2014, PMx$X2015)
+brP <- data.frame(PBr$X2005, PBr$X2006, PBr$X2007, PBr$X2008, PBr$X2009, PBr$X2010, PBr$X2011, PBr$X2012, PBr$X2013, PBr$X2014, PBr$X2015)
+arP <- data.frame(PAr$X2005, PAr$X2006, PAr$X2007, PAr$X2008, PAr$X2009, PAr$X2010, PAr$X2011, PAr$X2012, PAr$X2013, PAr$X2014, PAr$X2015)
+
+
+mxd <- data.frame(dMx$X2005, dMx$X2006, dMx$X2007, dMx$X2008, dMx$X2009, dMx$X2010, dMx$X2011, dMx$X2012, dMx$X2013, dMx$X2014, dMx$X2015)
+brd <- data.frame(dBr$X2005, dBr$X2006, dBr$X2007, dBr$X2008, dBr$X2009, dBr$X2010, dBr$X2011, dBr$X2012, dBr$X2013, dBr$X2014, dBr$X2015)
+ard <- data.frame(dAr$X2005, dAr$X2006, dAr$X2007, dAr$X2008, dAr$X2009, dAr$X2010, dAr$X2011, dAr$X2012, dAr$X2013, dAr$X2014, dAr$X2015)
+
+
+mxg <- data.frame(gMx$X2005, gMx$X2006, gMx$X2007, gMx$X2008, gMx$X2009, gMx$X2010, gMx$X2011, gMx$X2012, gMx$X2013, gMx$X2014, gMx$X2015)
+brg <- data.frame(gBr$X2005, gBr$X2006, gBr$X2007, gBr$X2008, gBr$X2009, gBr$X2010, gBr$X2011, gBr$X2012, gBr$X2013, gBr$X2014, gBr$X2015)
+arg <- data.frame(gAr$X2005, gAr$X2006, gAr$X2007, gAr$X2008, gAr$X2009, gAr$X2010, gAr$X2011, gAr$X2012, gAr$X2013, gAr$X2014, gAr$X2015)
+
+
+mxG <- data.frame(GMx$X2005, GMx$X2006, GMx$X2007, GMx$X2008, GMx$X2009, GMx$X2010, GMx$X2011, GMx$X2012, GMx$X2013, GMx$X2014, GMx$X2015)
+brG <- data.frame(GBr$X2005, GBr$X2006, GBr$X2007, GBr$X2008, GBr$X2009, GBr$X2010, GBr$X2011, GBr$X2012, GBr$X2013, GBr$X2014, GBr$X2015)
+arG <- data.frame(GAr$X2005, GAr$X2006, GAr$X2007, GAr$X2008, GAr$X2009, GAr$X2010, GAr$X2011, GAr$X2012, GAr$X2013, GAr$X2014, GAr$X2015)
+
+
+mxLm <- data.frame(LmMx$X2005, LmMx$X2006, LmMx$X2007, LmMx$X2008, LmMx$X2009, LmMx$X2010, LmMx$X2011, LmMx$X2012, LmMx$X2013, LmMx$X2014, LmMx$X2015)
+brLm <- data.frame(LmBr$X2005, LmBr$X2006, LmBr$X2007, LmBr$X2008, LmBr$X2009, LmBr$X2010, LmBr$X2011, LmBr$X2012, LmBr$X2013, LmBr$X2014, LmBr$X2015)
+arLm <- data.frame(LmAr$X2005, LmAr$X2006, LmAr$X2007, LmAr$X2008, LmAr$X2009, LmAr$X2010, LmAr$X2011, LmAr$X2012, LmAr$X2013, LmAr$X2014, LmAr$X2015)
+
+
+mxLf <- data.frame(LfMx$X2005, LfMx$X2006, LfMx$X2007, LfMx$X2008, LfMx$X2009, LfMx$X2010, LfMx$X2011, LfMx$X2012, LfMx$X2013, LfMx$X2014, LfMx$X2015)
+brLf <- data.frame(LfBr$X2005, LfBr$X2006, LfBr$X2007, LfBr$X2008, LfBr$X2009, LfBr$X2010, LfBr$X2011, LfBr$X2012, LfBr$X2013, LfBr$X2014, LfBr$X2015)
+arLf <- data.frame(LfAr$X2005, LfAr$X2006, LfAr$X2007, LfAr$X2008, LfAr$X2009, LfAr$X2010, LfAr$X2011, LfAr$X2012, LfAr$X2013, LfAr$X2014, LfAr$X2015)
 
 
 
