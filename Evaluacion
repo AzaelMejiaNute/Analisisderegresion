@@ -1,0 +1,32 @@
+###################Evaluación###########################
+
+install.packages("foreign")
+require(foreign)
+install.packages("questionr")
+require(questionr)
+solorural <- data.frame(read.spss("C://Users//Sala-C14//Downloads//solorural.sav"))
+
+####NO corre la funcion wtd.table, los datos son muestrales respecto a la poblacion ocupada
+
+table (solorural$sex,weights = solorural$fac_mti)
+table (solorural$sex)
+
+ocup <- subset(solorural, solorural$clase2==1)
+table(solorural$clase2==1)
+table(ocup$sex)
+
+Var<- c("Pob5_17", "Tam_Muest", "Ocup", "%Ocup", "caractindivi", "5-9", "10-13", "14-17", "Total", "Ocup_asis_esc", "AsisEsc", "NAsis", "totAsis", "caractHOg", "1 a 3 integrantes", "4 a 5 integrantes", "6 a 7 intengrantes", "8 y más", "Tottam")
+Ninos <-c(9302, 9302,1414, 74.9,"-", 0, 288, 1126,1414,"-" ,792,622,1414, "-",136,327,158,71, 692) 
+Ninas <-c(8798, 8798,474,25.1, "-", 0,91,383,474, "-",248,226,474, "-",61,108,51,23, 243)
+Total<- c(18100, 18100,1888, 100,"-", 0, 379,1509, 1888, "-",1040,848, 1888, "-",197,435,209,94,935)
+
+ocup$eda1[as.numeric(ocup$eda) >= 5 & as.numeric(ocup$eda)<= 9] <- 1
+ocup$eda1[as.numeric(ocup$eda) >= 10 & as.numeric(ocup$eda)<= 13] <- 2
+ocup$eda1[as.numeric(ocup$eda) >= 14 & as.numeric(ocup$eda)<= 17] <- 3
+table(solorural$sex)
+table (ocup$eda1, ocup$sex)
+table (ocup$asis, ocup$sex)
+
+table (ocup$tam_hog, ocup$sex)
+
+Tabulado <- data.frame(Var, Ninos, Ninas, Total)
