@@ -1,0 +1,41 @@
+    ##t_perss / sex +eda1+ asis+ sex_jefe + escol_jefe + t_apo1 +ocu_jefe
+
+ocuptot$eda1[as.numeric(ocuptot$eda) >= 5 & as.numeric(ocuptot$eda)<= 9] <- 1
+ocuptot$eda1[as.numeric(ocuptot$eda) >= 10 & as.numeric(ocuptot$eda)<= 13] <- 2
+ocuptot$eda1[as.numeric(ocuptot$eda) >= 14 & as.numeric(ocuptot$eda)<= 17] <- 3
+
+table(ocuptot$eda1,ocuptot$eda)
+
+ocuptot$t_per <- revalue(factor(ocuptot$t_per), c("4"=NA))
+table(ocuptot$t_per)
+
+table(ocuptot$escol_jefe)
+
+ocuptot$escol_jefe <- as.numeric(ocuptot$escol_jefe)
+ocuptot$escol_jefe <- revalue(factor(ocuptot$escol_jefe), c("7"=NA))###otra forma cde etiquetar
+###no deja ya que ya no hay 7
+
+###Etiquetar
+table(ocuptot$sex)###listas
+table(ocuptot$sex_jefe)###listas
+table(ocuptot$t_apo1)##lista
+ocuptot$escol_jefe<-factor(ocuptot$escol_jefe, levels = c(1,2,3,4,5,6),labels = c("Sin intruccion", "Primaria incompleta", "Primaria completa", "Secundaria incompleta", "Secundaria completa", "Algun anios de preparatoria o equivalente"))
+ocuptot$t_per <- factor(ocuptot$t_per, levels = c(1,2,3),labels =  c("Familiar", "No familiar", "Trabaja por cuenta propia"))
+table(ocuptot$t_per)
+table(ocuptot$escol_jefe)
+ocuptot$eda1 <- factor(ocuptot$eda1, levels = c(1,2,3),labels =  c("7-9", "10-13", "14-17"))
+ocuptot$eda1 <- revalue(factor(ocuptot$eda1), c("1"="7-9","2"="10-13","3"="14-17"))###otra forma de recodificar
+table(ocuptot$eda1)
+
+require(nnet)
+mod1 <- multinom(t_per~1, data = ocuptot)
+mofi <- multinom(t_per~sex+ eda1+asis+sex_jefe+escol_jefe+t_apo1+ocu_jefe, data = ocuptot)
+g <- Summary(mofi, wald = T)
+
+
+install.packages("stargazer")####extrae los elementos importantes que se
+###pueden interpretar
+library(stargazer)
+s <- stargazer(mofi, type = 'html', title = "Coefficients", summary = T)
+stargazer(mofi, type = 'text', title = "mlogit", digits = 2, out = "C://Users//Sala-C14//Downloads//mlogit.txt")###exporta a texto en froma simplificada
+
