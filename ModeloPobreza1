@@ -1,0 +1,113 @@
+######               Pobreza            ####
+
+install.packages("foreing")
+require(foreign)
+BDMM<-data.frame(read.csv("C://Users//admin//Desktop//Variables-Dependientes.csv"))
+install.packages("questionr")
+require(questionr)
+?factor
+var <- c("Indicator.Name","X2000","X2001","X2002","X2003","X2004","X2005", "X2006", "X2007", "X2008", "X2009", "X2010", "X2011", "X2012", "X2013", "X2014")
+Bmex <- BDMM[, var]
+
+
+a <- subset(Bmex, Bmex$Indicator.Name == "Poverty gap at $1.90 a day (2011 PPP) (%)")
+aa<- c(a$X2002,a$X2004, a$X2006, a$X2008, a$X2010, a$X2012, a$X2014)
+b <- subset(Bmex, Bmex$Indicator.Name == "Poverty gap at $3.10 a day (2011 PPP) (%)")
+bb <- c(b$X2002, b$X2004, b$X2006, b$X2008, b$X2010, b$X2012, b$X2014)
+c <- subset(Bmex, Bmex$Indicator.Name == "Age dependency ratio (% of working-age population)")
+cc <- c(c$X2002,c$X2004, c$X2006, c$X2008, c$X2010, c$X2012, c$X2014)
+d <- subset(Bmex, Bmex$Indicator.Name == "Informal employment (% of total non-agricultural employment)")
+dd <- c(d$X2002,d$X2004, d$X2006, d$X2008, d$X2010, d$X2012, d$X2014)
+e <- subset(Bmex, Bmex$Indicator.Name == "Labor force participation rate, total (% of total population ages 15+) (national estimate)")
+ee <- c(e$X2002,e$X2004, e$X2006, e$X2008, e$X2010, e$X2012, e$X2014)
+f <- subset(Bmex, Bmex$Indicator.Name == "Labor force, total")
+ff <- c(f$X2002, f$X2004, f$X2006, f$X2008, f$X2010, f$X2012, f$X2014)
+g <- subset(Bmex, Bmex$Indicator.Name == "Long-term unemployment (% of total unemployment)")
+gg <- c(g$X2002,g$X2004, g$X2006, g$X2008, g$X2010, g$X2012, g$X2014)
+h <- subset(Bmex, Bmex$Indicator.Name == "Unemployment, total (% of total labor force) (national estimate)")
+hh <- c(h$X2002,h$X2004,h$X2006, h$X2008, h$X2010, h$X2012, h$X2014)
+k <- subset(Bmex, Bmex$Indicator.Name == "Adult literacy rate, population 15+ years, both sexes (%)")
+kk <- c(k$X2002,k$X2004, k$X2006, k$X2008, k$X2010, k$X2012, k$X2014)
+l <- subset(Bmex, Bmex$Indicator.Name == "Employment in agriculture (% of total employment)")
+ll <- c(l$X2002,l$X2004, l$X2006, l$X2008, l$X2010, l$X2012, l$X2014)
+m <- subset(Bmex, Bmex$Indicator.Name == "Employment in industry (% of total employment)")
+mm <- c(m$X2002,m$X2004, m$X2006, m$X2008, m$X2010, m$X2012, m$X2014)
+n <- subset(Bmex, Bmex$Indicator.Name == "Employment in services (% of total employment)")
+nn <- c(n$X2002,n$X2004, n$X2006, n$X2008, n$X2010, n$X2012, n$X2014)
+o <- subset(Bmex, Bmex$Indicator.Name == "Employment to population ratio, 15+, total (%) (national estimate)")
+oo <- c(o$X2002,o$X2004, o$X2006, o$X2008, o$X2010, o$X2012, o$X2014)
+p <- subset(Bmex, Bmex$Indicator.Name == "Part time employment, total (% of total employment)")
+pp <- c(p$X2002,p$X2004, p$X2006, p$X2008, p$X2010, p$X2012, p$X2014)
+q <- subset(Bmex, Bmex$Indicator.Name == "Rural population (% of total population)")
+qq <- c(q$X2002,q$X2004, q$X2006, q$X2008, q$X2010, q$X2012, q$X2014)
+r <- subset(Bmex, Bmex$Indicator.Name == "Self-employed, total (% of total employed)")
+rr <- c(r$X2002,r$X2004, r$X2006, r$X2008, r$X2010, r$X2012, r$X2014)
+s <- subset(Bmex, Bmex$Indicator.Name == "Unemployment, youth total (% of total labor force ages 15-24) (national estimate)")
+ss <- c(s$X2002,s$X2004, s$X2006, s$X2008, s$X2010, s$X2012, s$X2014)
+t <- subset(Bmex, Bmex$Indicator.Name == "Age dependency ratio, old (% of working-age population)")
+tt <- c(t$X2002,t$X2004, t$X2006, t$X2008, t$X2010, t$X2012, t$X2014)
+u <- subset(Bmex, Bmex$Indicator.Name == "Age dependency ratio, young (% of working-age population)")
+uu <- c(u$X2002,u$X2004, u$X2006, u$X2008, u$X2010, u$X2012, u$X2014)
+v <- subset(Bmex, Bmex$Indicator.Name == "Population ages 15-64 (% of total)")
+vv <- c(v$X2002,v$X2004, v$X2006, v$X2008, v$X2010, v$X2012, v$X2014)
+w <- subset(Bmex, Bmex$Indicator.Name == "Rural population growth (annual %)")
+ww <- c(w$X2002,w$X2004, w$X2006, w$X2008, w$X2010, w$X2012, w$X2014)
+x <- subset(Bmex, Bmex$Indicator.Name == "Urban population")
+xx <- c(x$X2002,x$X2004, x$X2006, x$X2008, x$X2010, x$X2012, x$X2014)
+
+
+##mm, nn, oo, dd, rr tienen datos faltantes.
+##no entra más que sólo 5 variables.
+
+
+i <- rbind.data.frame(a, b, c, d, e, f, g, h, k, l , m , n, o, p , q, r, s, t, u, v, w, x)
+j <- data.frame(aa, bb, cc, ee, ff, gg, hh, kk, oo, pp, qq, ss, tt, uu, vv, ww, xx)
+cor(j,use="everything", method="pearson")
+
+mrm <- lm(aa~cc+ff+gg+kk+pp, data = j)
+step(mrm, direction = "backward")
+
+##Presentan correlación negativa con salto
+
+plot(ee,aa, pch=12, xlab="Labor force participation rate, total (% of total population ages 15+) (national estimate)", ylab="Poverty gap at $1.90 a day (2011 PPP) (%)", main="Gráfica de Disperción", col="blue")
+plot(ff,aa, pch=12, xlab="Labor force, total", ylab="Poverty gap at $1.90 a day (2011 PPP) (%)", main="Gráfica de Disperción", col="blue")
+plot(pp,aa, pch=12, xlab="Part time employment, total (% of total employment)", ylab="Poverty gap at $1.90 a day (2011 PPP) (%)", main="Gráfica de Disperción", col="blue")
+plot(kk,aa, pch=12, xlab="Adult literacy rate, population 15+ years, both sexes (%)", ylab="Poverty gap at $1.90 a day (2011 PPP) (%)", main="Gráfica de Disperción", col="blue")
+plot(gg,aa, pch=12, xlab="Long-term unemployment (% of total unemployment)", ylab="Poverty gap at $1.90 a day (2011 PPP) (%)", main="Gráfica de Disperción", col="blue")
+plot(cc,aa, pch=12, xlab="Age dependency ratio (% of working-age population)", ylab="Poverty gap at $1.90 a day (2011 PPP) (%)", main="Gráfica de Disperción", col="blue")
+
+###se consideraron las variables con mayor correlación a <<Poverty gap at $1.90 a day (2011 PPP) (%)>>
+
+##Start:  AIC=-19.87
+##aa ~ ee + ff + gg + kk + pp
+
+##Df Sum of Sq     RSS      AIC
+##- ee    1   0.00001 0.07381 -21.8653
+##- ff    1   0.00164 0.07544 -21.7125
+##- pp    1   0.00665 0.08044 -21.2627
+##- kk    1   0.00931 0.08311 -21.0343
+##<none>              0.07380 -19.8664
+##- gg    1   0.54144 0.61524  -7.0216
+
+##Step:  AIC=-21.87
+##aa ~ ff + gg + kk + pp
+
+##Df Sum of Sq     RSS      AIC
+##<none>              0.07381 -21.8653
+##- ff    1   0.06256 0.13637 -19.5679
+##- pp    1   0.13231 0.20612 -16.6765
+##- kk    1   0.23212 0.30593 -13.9121
+##- gg    1   0.54222 0.61602  -9.0127
+
+##Call:
+##  lm(formula = aa ~ ff + gg + kk + pp, data = j)
+
+##Coefficients:
+##  (Intercept)           ff           gg           kk           pp  
+##  1.047e+02         1.840e-07   -1.616e+00   -1.278e+00    4.774e-01  
+
+
+
+
+
+
